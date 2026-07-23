@@ -25,6 +25,31 @@ Dit patroon is de technische handhaving van de never-do (bezettingskalender nooi
 gasten/publiek, zie P0-3-acceptatiecriteria in de PRD). Test: `src/lib/server/auth/guards.test.ts`
 — draai bij elke wijziging aan `hooks.server.ts` of een `(app)`-guard met `npm run test`.
 
+## Harde regel: mobiel-responsive
+
+Elk scherm/component moet werken op een telefoonbreedte (~360-390px), zonder horizontaal
+scrollen en zonder dichtgeslibde content (bv. cijfers/labels die te smal worden om te lezen).
+Zie `../CLAUDE.md` — Always-do. Concreet:
+
+- **Geen vaste `width`/multi-kolom-grids zonder breakpoint.** Gebruik `max-width` i.p.v. `width`
+  voor containers (zie `.ag-shell`, `.ag-hero-content`, `.ag-story`, etc. in `tokens.css` — die
+  krimpen vanzelf mee). Een `grid-template-columns` met meer dan 1 kolom (bv. `.ag-stats-grid`,
+  `.ag-form-grid-2`, `.ag-gallery-grid`) heeft altijd een `@media (max-width: …)`-override die
+  terugvalt naar 1 (of minder) kolommen — zie die klassen in `tokens.css` als voorbeeld/patroon.
+- **One-off inline `style="display:grid; grid-template-columns: …"` in een `+page.svelte` is
+  een rode vlag** — voeg in plaats daarvan een herbruikbare klasse toe aan `tokens.css` mét
+  breakpoint, zoals `.ag-stats-grid`/`.ag-form-grid-2`. Dat is ook al de bestaande conventie
+  voor de landingspagina (`.ag-landing-*`-klassen i.p.v. inline styles).
+- **Test na elke UI-wijziging** op 375px breedte (bv. via de browser-tool: `resize_window` naar
+  `mobile`, dan een `javascript_tool`-check op `document.documentElement.scrollWidth > innerWidth`
+  om horizontale overflow te detecteren — screenshot werkt niet altijd headless, deze JS-check
+  wel). Voor auth-gated schermen (admin/gast): niet het echte account gebruiken om in te loggen
+  als je de wachtwoorden niet weet — maak een tijdelijk testaccount/sessie via D1, test, en
+  verwijder die daarna weer (zie sessie van 2026-07-23 in `../LOG.md` voor het patroon).
+- Afbeeldingen die aan de app worden toegevoegd (bv. huisfoto's): altijd comprimeren/resizen
+  voor gebruik (bv. via `sharp`, tijdelijk geïnstalleerd met `--no-save`) — ruwe telefoonfoto's
+  van meerdere MB's horen niet in `static/`, dat botst met mobiel-eerst/wisselend bereik.
+
 ## Kernbestanden
 
 | Bestand | Rol |

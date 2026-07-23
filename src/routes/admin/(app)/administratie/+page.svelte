@@ -18,7 +18,7 @@
 	<p class="ag-error">{form.error}</p>
 {/if}
 
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-bottom: 16px;">
+<div class="ag-stats-grid">
 	<div class="ag-metric"><span class="ag-muted">Inkomsten</span><b>{euro(data.incomeCents)}</b></div>
 	<div class="ag-metric"><span class="ag-muted">Uitgaven</span><b>{euro(data.expenseCents)}</b></div>
 	<div class="ag-metric"><span class="ag-muted">Saldo</span><b>{euro(data.balanceCents)}</b></div>

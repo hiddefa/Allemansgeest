@@ -24,7 +24,7 @@
 		<b>{stay.title}</b>
 		<span class="ag-muted" style="margin-bottom: 8px;">{fmt(stay.startDate)} – {fmt(stay.endDate)}</span>
 		<input type="hidden" name="stayId" value={stay.id} />
-		<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+		<div class="ag-form-grid-2">
 			<div class="ag-field">
 				<label for="elec-start-{stay.id}">Stroom start (kWh)</label>
 				<input
