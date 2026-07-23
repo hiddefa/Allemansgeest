@@ -175,3 +175,34 @@ h2,
 h3 {
 	color: var(--ag-bordeaux);
 }
+
+.ag-login-toggle {
+	margin-left: auto;
+}
+
+.ag-login-toggle summary {
+	list-style: none;
+	cursor: pointer;
+}
+
+.ag-login-toggle summary::-webkit-details-marker {
+	display: none;
+}
+
+.ag-login-panel {
+	position: absolute;
+	right: 16px;
+	top: 100%;
+	margin-top: 6px;
+	width: 240px;
+	padding: 12px;
+	background: white;
+	border: 1px solid var(--ag-cream2);
+	border-radius: var(--ag-radius);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	z-index: 10;
+}
+
+.ag-login-panel .ag-field {
+	margin-bottom: 8px;
+}

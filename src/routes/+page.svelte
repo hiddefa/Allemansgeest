@@ -10,8 +10,26 @@
 </svelte:head>
 
 <div class="ag-shell">
-	<div class="ag-header">
+	<div class="ag-header" style="position: relative;">
 		<span class="ag-title">Allemansgeest</span>
+
+		<!-- P0-14: gastenlogin op de landingspagina, hier als compacte knop rechtsboven i.p.v.
+		     een groot inline formulier. <details> geeft een uitklapbaar paneel zonder JS nodig. -->
+		<details class="ag-login-toggle" open={!!form?.loginError}>
+			<summary class="ag-btn secondary" style="font-size: 13px; padding: 5px 12px;">Inloggen</summary>
+			<div class="ag-login-panel">
+				{#if form?.loginError}
+					<p class="ag-error" style="margin: 0 0 8px;">{form.loginError}</p>
+				{/if}
+				<form method="POST" action="?/guestLogin" use:enhance>
+					<div class="ag-field">
+						<label for="guest-password">Gastwachtwoord</label>
+						<input id="guest-password" name="password" type="password" required />
+					</div>
+					<button class="ag-btn" type="submit">Inloggen</button>
+				</form>
+			</div>
+		</details>
 	</div>
 
 	<div class="ag-main">
@@ -20,18 +38,6 @@
 			Een vakantiehuisje in Harfsen, midden in het groen. Hier kom je tot rust — of je nu een week
 			logeert of gewoon nieuwsgierig bent naar het verhaal achter dit huis.
 		</p>
-
-		<h2>Ben je te gast?</h2>
-		{#if form?.loginError}
-			<p class="ag-error">{form.loginError}</p>
-		{/if}
-		<form method="POST" action="?/guestLogin" use:enhance class="ag-card" style="max-width: 320px;">
-			<div class="ag-field">
-				<label for="guest-password">Gastwachtwoord</label>
-				<input id="guest-password" name="password" type="password" required />
-			</div>
-			<button class="ag-btn" type="submit">Inloggen</button>
-		</form>
 
 		<h2>Contact</h2>
 		<p class="ag-muted">Nieuwsgierig geworden? Stuur een bericht, we reageren zo snel mogelijk.</p>
@@ -57,9 +63,5 @@
 				<button class="ag-btn" type="submit">Versturen</button>
 			</form>
 		{/if}
-
-		<p class="ag-muted" style="margin-top: 24px;">
-			Ben je admin? <a href="/admin/login" style="color: var(--ag-forest);">Log hier in</a>.
-		</p>
 	</div>
 </div>
