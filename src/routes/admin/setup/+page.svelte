@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import PasswordField from '$lib/components/PasswordField.svelte';
 	import type { ActionData } from './$types';
 
 	let { form }: { form: ActionData } = $props();
@@ -31,17 +32,13 @@
 				<label for="email">E-mailadres</label>
 				<input id="email" name="email" type="email" autocomplete="username" required />
 			</div>
-			<div class="ag-field">
-				<label for="password">Wachtwoord</label>
-				<input
-					id="password"
-					name="password"
-					type="password"
-					autocomplete="new-password"
-					minlength="8"
-					required
-				/>
-			</div>
+			<PasswordField
+				id="password"
+				name="password"
+				label="Wachtwoord"
+				autocomplete="new-password"
+				minlength={8}
+			/>
 			<button class="ag-btn" type="submit">Account aanmaken</button>
 		</form>
 	</div>

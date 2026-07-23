@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import PasswordField from '$lib/components/PasswordField.svelte';
 	import type { ActionData } from './$types';
 
 	let { form }: { form: ActionData } = $props();
@@ -22,10 +23,7 @@
 					<p class="ag-error" style="margin: 0 0 8px;">{form.loginError}</p>
 				{/if}
 				<form method="POST" action="?/guestLogin" use:enhance>
-					<div class="ag-field">
-						<label for="guest-password">Gastwachtwoord</label>
-						<input id="guest-password" name="password" type="password" required />
-					</div>
+					<PasswordField id="guest-password" name="password" label="Gastwachtwoord" />
 					<button class="ag-btn" type="submit">Inloggen</button>
 				</form>
 			</div>

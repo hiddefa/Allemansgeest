@@ -206,3 +206,29 @@ h3 {
 .ag-login-panel .ag-field {
 	margin-bottom: 8px;
 }
+
+.ag-password-wrap {
+	position: relative;
+}
+
+.ag-password-wrap input {
+	width: 100%;
+	padding-right: 36px;
+}
+
+.ag-eye-toggle {
+	position: absolute;
+	right: 4px;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	padding: 0;
+	background: transparent;
+	border: none;
+	color: var(--ag-forest);
+	cursor: pointer;
+}
