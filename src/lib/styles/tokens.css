@@ -1,0 +1,177 @@
+/* Kleurenpalet overgenomen uit Docs_Allemansgeest/allemansgeest_klikbare_mockup.html.
+   Geen volledige huisstijl (expliciete non-goal in de PRD) — dit is de "goed genoeg
+   v1 look", niet iets om meteen te vervangen. */
+:root {
+	--ag-lime: #8bc34a;
+	--ag-green: #00a651;
+	--ag-forest: #0b5e2a;
+	--ag-cream: #f5efdb;
+	--ag-cream2: #efe6c8;
+	--ag-bordeaux: #6d1a2b;
+	--ag-radius: 10px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family:
+		system-ui,
+		-apple-system,
+		'Segoe UI',
+		sans-serif;
+	background: var(--ag-cream);
+	color: var(--ag-bordeaux);
+}
+
+.ag-shell {
+	max-width: 720px;
+	margin: 0 auto;
+	min-height: 100vh;
+	background: var(--ag-cream);
+}
+
+.ag-header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 16px;
+	background: var(--ag-cream2);
+	border-bottom: 2px solid var(--ag-forest);
+}
+
+.ag-header .ag-title {
+	font-weight: 500;
+	font-size: 16px;
+	color: var(--ag-bordeaux);
+}
+
+.ag-nav {
+	display: flex;
+	gap: 6px;
+	padding: 10px 16px 0;
+	flex-wrap: wrap;
+}
+
+.ag-nav a {
+	font-size: 13px;
+	padding: 6px 12px;
+	border-radius: var(--ag-radius);
+	border: 1px solid var(--ag-forest);
+	color: var(--ag-forest);
+	text-decoration: none;
+	background: transparent;
+}
+
+.ag-nav a.active,
+.ag-nav a:hover {
+	background: var(--ag-forest);
+	color: var(--ag-cream);
+}
+
+.ag-main {
+	padding: 16px;
+}
+
+.ag-card {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	padding: 10px 12px;
+	margin-bottom: 8px;
+	background: white;
+	border: 0.5px solid var(--ag-cream2);
+	border-radius: var(--ag-radius);
+}
+
+.ag-card.row {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.ag-muted {
+	color: #7a6a5a;
+	font-size: 13px;
+}
+
+.ag-metric {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 10px 12px;
+	background: white;
+	border-radius: var(--ag-radius);
+	border: 0.5px solid var(--ag-cream2);
+}
+
+.ag-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	background: var(--ag-forest);
+	color: var(--ag-cream);
+	font-size: 11px;
+	padding: 2px 8px;
+	border-radius: var(--ag-radius);
+	width: fit-content;
+}
+
+.ag-btn {
+	font: inherit;
+	padding: 8px 14px;
+	border-radius: var(--ag-radius);
+	border: 1px solid var(--ag-forest);
+	background: var(--ag-forest);
+	color: var(--ag-cream);
+	cursor: pointer;
+}
+
+.ag-btn.secondary {
+	background: transparent;
+	color: var(--ag-forest);
+}
+
+.ag-btn.danger {
+	background: var(--ag-bordeaux);
+	border-color: var(--ag-bordeaux);
+}
+
+.ag-field {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-bottom: 10px;
+}
+
+.ag-field label {
+	font-size: 13px;
+	color: var(--ag-bordeaux);
+}
+
+.ag-field input,
+.ag-field textarea,
+.ag-field select {
+	font: inherit;
+	padding: 8px 10px;
+	border-radius: var(--ag-radius);
+	border: 1px solid var(--ag-cream2);
+	background: white;
+}
+
+.ag-error {
+	color: var(--ag-bordeaux);
+	background: #fbeaea;
+	border: 1px solid var(--ag-bordeaux);
+	border-radius: var(--ag-radius);
+	padding: 8px 12px;
+	font-size: 14px;
+}
+
+h1,
+h2,
+h3 {
+	color: var(--ag-bordeaux);
+}
