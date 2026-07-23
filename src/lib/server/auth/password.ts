@@ -1,7 +1,9 @@
 // PBKDF2-SHA256 via Web Crypto SubtleCrypto — geen native bcrypt/argon2, die werken
-// niet betrouwbaar op de Cloudflare Workers-runtime. 600k iteraties per OWASP-richtlijn.
-
-const ITERATIONS = 600_000;
+// niet betrouwbaar op de Cloudflare Workers-runtime. OWASP raadt 600k iteraties aan,
+// maar dat overschrijdt de CPU-tijdlimiet van het Workers Free-plan (10ms per request)
+// en gaf een 500 bij het aanmaken van een account. 100k blijft ruim boven verouderde
+// PBKDF2-aanbevelingen en past binnen die limiet.
+const ITERATIONS = 100_000;
 const KEY_LENGTH_BITS = 256;
 
 function toBase64(bytes: Uint8Array): string {
