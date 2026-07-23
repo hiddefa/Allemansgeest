@@ -1,11 +1,12 @@
 name = "allemansgeest"
 compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".svelte-kit/cloudflare"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "allemansgeest-db"
-database_id = "REPLACE_AFTER_D1_CREATE"
+database_id = "4e26d13c-dab2-4955-9b31-a1de84d11839"
 
 [[r2_buckets]]
 binding = "BUCKET"
