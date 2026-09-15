@@ -13,7 +13,8 @@
 		"test": "vitest run",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate:local": "wrangler d1 migrations apply allemansgeest-db --local",
-		"db:migrate:remote": "wrangler d1 migrations apply allemansgeest-db --remote"
+		"db:migrate:remote": "wrangler d1 migrations apply allemansgeest-db --remote",
+		"reset-admin-password": "node scripts/reset-admin-password.mjs"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^5.20260723.1",

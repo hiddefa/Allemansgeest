@@ -83,6 +83,13 @@ npm run db:migrate:remote  # migratie toepassen op productie-D1
 Eerste admin-account: draai de app, open `/admin/setup` (werkt alleen zolang er nog
 geen enkel admin-account bestaat — daarna redirect naar `/admin/login`).
 
+**Admin-wachtwoord vergeten?** Er is bewust geen "wachtwoord vergeten"-flow in de app zelf
+(zou een e-mail-verzendpad + tokens vereisen voor een risico dat zelden voorkomt). Draai
+zelf `npm run reset-admin-password` — vraagt e-mailadres + nieuw wachtwoord interactief,
+hasht lokaal (zelfde algoritme als `password.ts`) en zet het via `wrangler d1 execute`
+in de productie-D1. Niemand anders dan degene die het commando draait ziet het wachtwoord.
+`--dry-run` toont alleen het SQL-statement zonder het uit te voeren.
+
 Seed-data (checklist-items, huisregels-secties, storingscontact-placeholder):
 `wrangler d1 execute allemansgeest-db --local --file=./drizzle/seed.sql` (en `--remote`
 voor productie na de eerste deploy).
