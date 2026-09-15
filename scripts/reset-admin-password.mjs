@@ -12,6 +12,9 @@
 
 import { randomBytes, pbkdf2Sync } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
+import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import readline from 'node:readline';
 
 const ITERATIONS = 100_000; // moet gelijk blijven aan src/lib/server/auth/password.ts
@@ -36,19 +39,31 @@ function applyChange(email, passwordHash) {
 
 	console.log(`\nWachtwoord voor ${email} wordt bijgewerkt in ${D1_DATABASE} (productie)...\n`);
 
-	const result = spawnSync(
-		'npx',
-		['wrangler', 'd1', 'execute', D1_DATABASE, '--remote', '--command', sql],
-		{ stdio: 'inherit', shell: true }
-	);
+	// SQL naar een tijdelijk bestand i.p.v. als --command-argument: spawnSync+shell:true met
+	// een args-array mishandelt op Windows argumenten die spaties/quotes bevatten (de SQL
+	// hierboven heeft beide) — dat gaf "You must provide either --command or --file". Een
+	// bestandspad heeft dat probleem niet.
+	const tmpDir = mkdtempSync(join(tmpdir(), 'ag-admin-reset-'));
+	const sqlFile = join(tmpDir, 'reset.sql');
+	writeFileSync(sqlFile, sql, 'utf8');
 
-	if (result.status !== 0) {
+	let result;
+	try {
+		result = spawnSync(`npx wrangler d1 execute ${D1_DATABASE} --remote --file="${sqlFile}"`, {
+			stdio: 'inherit',
+			shell: true
+		});
+	} finally {
+		rmSync(tmpDir, { recursive: true, force: true });
+	}
+
+	if (!result || result.status !== 0) {
 		console.error(
 			'\nAutomatisch uitvoeren is niet gelukt (zie foutmelding hierboven — vaak: eerst `npx wrangler login` nodig).'
 		);
 		console.error('Voer dit statement dan handmatig uit:\n');
 		console.error(`  npx wrangler d1 execute ${D1_DATABASE} --remote --command "${sql.replace(/"/g, '\\"')}"`);
-		process.exit(result.status ?? 1);
+		process.exit(result?.status ?? 1);
 	}
 
 	console.log(`\nGelukt. Je kunt nu inloggen op /admin/login met e-mailadres ${email} en je nieuwe wachtwoord.`);
